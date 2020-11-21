@@ -5,12 +5,14 @@ import {createTripSortTemplate} from "./view/sort.js";
 import {createEventListTemplate} from "./view/event-list.js";
 import {createEventEditTemplate} from "./view/event-edit.js";
 import {createEventPointTemplate} from "./view/event-point.js";
+import {generateTaskArray} from "./mock/task.js";
 
-const EVENTS_COUNT = 3;
+const NUMBER_TASKS = 20;
 const siteHeaderElement = document.querySelector(`.page-header`);
 const siteHeaderControlsElement = siteHeaderElement.querySelector(`.trip-main__trip-controls`);
 const siteMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = siteMainElement.querySelector(`.trip-events`);
+const points = generateTaskArray(NUMBER_TASKS);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -26,6 +28,6 @@ const siteTripEventsListElement = siteTripEventsElement.querySelector(`.trip-eve
 
 render(siteTripEventsListElement, createEventEditTemplate(), `afterbegin`);
 
-for (let i = 0; i < EVENTS_COUNT; i++) {
-  render(siteTripEventsListElement, createEventPointTemplate(), `beforeend`);
-}
+points.forEach((item) => {
+  render(siteTripEventsListElement, createEventPointTemplate(item), `beforeend`);
+});
