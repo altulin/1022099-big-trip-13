@@ -1,11 +1,21 @@
-export const createEventEditTemplate = () => {
+import {cityes} from '../const.js';
+
+const createDatalistTemplate = (locality) => {
+  return locality
+    .map((item) => {
+      return `<option value="${item}"></option>`;
+    });
+};
+
+export const createEventEditTemplate = (item) => {
+  const datalistTemplate = createDatalistTemplate(cityes);
   return `<li class="trip-events__item">
   <form class="event event--edit" action="#" method="post">
     <header class="event__header">
       <div class="event__type-wrapper">
         <label class="event__type  event__type-btn" for="event-type-toggle-1">
           <span class="visually-hidden">Choose event type</span>
-          <img class="event__type-icon" width="17" height="17" src="img/icons/flight.png" alt="Event type icon">
+          <img class="event__type-icon" width="17" height="17" src="img/icons/${item.pointType.toLowerCase()}.png" alt="Event type icon">
         </label>
         <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
@@ -72,9 +82,7 @@ export const createEventEditTemplate = () => {
         </label>
         <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="" list="destination-list-1">
         <datalist id="destination-list-1">
-          <option value="Amsterdam"></option>
-          <option value="Geneva"></option>
-          <option value="Chamonix"></option>
+          ${datalistTemplate}
         </datalist>
       </div>
 

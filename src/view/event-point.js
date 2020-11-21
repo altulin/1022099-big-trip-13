@@ -1,5 +1,6 @@
+
+
 export const createEventPointTemplate = (item) => {
-  // console.log(item);
   return `<li class="trip-events__item">
   <div class="event">
     <time class="event__date" datetime="2019-03-18">${item.date.dayOfMonth}</time>
@@ -9,7 +10,7 @@ export const createEventPointTemplate = (item) => {
     <h3 class="event__title">${item.pointType} ${item.city}</h3>
     <div class="event__schedule">
       <p class="event__time">
-        <time class="event__start-time" datetime="2019-03-18T10:30">${item.date.arrival}</time>
+        <time class="event__start-time" datetime="2019-03-18T10:30">${item.date}</time>
         &mdash;
         <time class="event__end-time" datetime="2019-03-18T11:00">${item.date.departure}</time>
       </p>
@@ -38,4 +39,3 @@ export const createEventPointTemplate = (item) => {
   </div>
 </li>`;
 };
-// event__favorite-btn--active

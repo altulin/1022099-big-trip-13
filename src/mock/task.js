@@ -5,8 +5,6 @@ import {types, cityes, otherOptions, expressions, offerTypes} from "../const.js"
 const PRICE_MIN = 5;
 const PRICE_MAX = 500;
 const COUNT_PHOTO = 5;
-// const DURATION_MAX = 14;
-// const NUMBER_TASKS = 15;
 const maxDaysGap = 7;
 
 
@@ -23,8 +21,10 @@ const getDay = () => {
   return {
     day: randomDate,
     dayOfMonth: randomDate.format(`MMM D`),
-    arrival: timeArrival.format(`HH:mm`),
-    departure: timeDeparture.format(`HH:mm`),
+    // arrival: timeArrival.format(`HH:mm`),
+    // departure: timeDeparture.format(`HH:mm`),
+    timeDeparture,
+    timeArrival,
     duration: convertMS(timeDuration)
   };
 };
