@@ -1,7 +1,7 @@
 import {convert, getDate} from "../utils.js";
 
 export const createEventPointTemplate = (item) => {
-  const {dateArrival, dateDeparture} = item.date;
+  const {date: {dateArrival, dateDeparture}} = item;
   const duration = convert(dateArrival, dateDeparture);
 
   return `<li class="trip-events__item">

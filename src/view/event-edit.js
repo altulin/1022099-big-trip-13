@@ -36,8 +36,7 @@ export const createEventEditTemplate = (item) => {
   const datalistTemplate = createDatalistTemplate(cityes);
   const eventTypeTemplate = createEventTypeTemplate(types);
   const offerSelectorTemplate = createOfferSelectorTemplate(offerTypes);
-  const {dateArrival, dateDeparture} = item.date;
-  const {mainPrice, pointType, city} = item;
+  const {date: {dateArrival, dateDeparture}, mainPrice, pointType, city} = item;
 
   return `<li class="trip-events__item">
   <form class="event event--edit" action="#" method="post">
