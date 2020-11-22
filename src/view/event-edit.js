@@ -1,4 +1,5 @@
 import {cityes} from '../const.js';
+import {getDate} from "../utils.js";
 
 const createDatalistTemplate = (locality) => {
   return locality
@@ -9,6 +10,9 @@ const createDatalistTemplate = (locality) => {
 
 export const createEventEditTemplate = (item) => {
   const datalistTemplate = createDatalistTemplate(cityes);
+  const {dateArrival, dateDeparture} = item.date;
+  const {mainPrice, pointType, city} = item;
+
   return `<li class="trip-events__item">
   <form class="event event--edit" action="#" method="post">
     <header class="event__header">
@@ -78,9 +82,9 @@ export const createEventEditTemplate = (item) => {
 
       <div class="event__field-group  event__field-group--destination">
         <label class="event__label  event__type-output" for="event-destination-1">
-          Flight
+          ${pointType}
         </label>
-        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="" list="destination-list-1">
+        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${city}" list="destination-list-1">
         <datalist id="destination-list-1">
           ${datalistTemplate}
         </datalist>
@@ -88,10 +92,10 @@ export const createEventEditTemplate = (item) => {
 
       <div class="event__field-group  event__field-group--time">
         <label class="visually-hidden" for="event-start-time-1">From</label>
-        <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="19/03/19 00:00">
+        <input class="event__input  event__input--time" id="event-start-time-1" type="text" name="event-start-time" value="${getDate(dateArrival).format(`YYYY/MM/DD HH:mm`)}">
         &mdash;
         <label class="visually-hidden" for="event-end-time-1">To</label>
-        <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="19/03/19 00:00">
+        <input class="event__input  event__input--time" id="event-end-time-1" type="text" name="event-end-time" value="${getDate(dateDeparture).format(`YYYY/MM/DD HH:mm`)}">
       </div>
 
       <div class="event__field-group  event__field-group--price">
@@ -99,7 +103,7 @@ export const createEventEditTemplate = (item) => {
           <span class="visually-hidden">Price</span>
           &euro;
         </label>
-        <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="">
+        <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${mainPrice}">
       </div>
 
       <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>

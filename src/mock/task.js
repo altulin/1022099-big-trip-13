@@ -1,5 +1,5 @@
-import dayjs from "dayjs";
-import {randomInt, convertMS} from "../utils.js";
+// import dayjs from "dayjs";
+import {randomInt, getDate} from "../utils.js";
 import {types, cityes, otherOptions, expressions, offerTypes} from "../const.js";
 
 const PRICE_MIN = 5;
@@ -10,22 +10,25 @@ const maxDaysGap = 7;
 
 const getDay = () => {
   const daysGap = randomInt(-maxDaysGap, maxDaysGap);
-  const randomDate = dayjs().add(daysGap, `day`)
+
+  const dateArrival = getDate().add(daysGap, `day`)
           .add(randomInt(24), `hour`)
           .add(randomInt(60), `minute`);
 
-  const timeArrival = randomDate;
-  const timeDeparture = randomDate.add(randomInt(20, 6000), `minute`);
-  const timeDuration = timeDeparture - timeArrival;
+  // const timeArrival = randomDate;
+  const dateDeparture = dateArrival.add(randomInt(20, 6000), `minute`);
+  // const timeDuration = timeDeparture - timeArrival;
 
   return {
-    day: randomDate,
-    dayOfMonth: randomDate.format(`MMM D`),
+    dateArrival: dateArrival.toDate(),
+    dateDeparture: dateDeparture.toDate()
+    // dayOfMonth: randomDate.format(`MMM D`),
     // arrival: timeArrival.format(`HH:mm`),
     // departure: timeDeparture.format(`HH:mm`),
-    timeDeparture,
-    timeArrival,
-    duration: convertMS(timeDuration)
+    // timeDeparture,
+    // timeArrival,
+
+    // duration: convertMS(timeDuration)
   };
 };
 
@@ -67,5 +70,5 @@ export const generateTaskArray = (number) => {
   return new Array(number)
     .fill(` `)
     .map(() => generateTask())
-    .sort((prev, next) => prev.date.day - next.date.day);
+    .sort((prev, next) => prev.date.dateArrival - next.date.dateArrival);
 };

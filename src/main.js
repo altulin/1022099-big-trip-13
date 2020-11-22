@@ -18,7 +18,7 @@ const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };
 
-render(siteHeaderControlsElement, createTripInfoTemplate(), `beforebegin`);
+render(siteHeaderControlsElement, createTripInfoTemplate(points[0]), `beforebegin`);
 render(siteHeaderControlsElement, createSiteMenuTemplate(), `afterbegin`);
 render(siteHeaderControlsElement, createSiteFilterTemplate(), `beforeend`);
 render(siteTripEventsElement, createTripSortTemplate(), `afterbegin`);

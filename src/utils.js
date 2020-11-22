@@ -1,4 +1,7 @@
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
+import dayjs from "dayjs";
+
+export const getDate = (date) => (date) ? dayjs(date) : dayjs();
 
 export const randomInt = (a = 1, b = 0) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -6,7 +9,8 @@ export const randomInt = (a = 1, b = 0) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
-export const convertMS = (milliseconds) => {
+export const convert = (timeIn, timeOut) => {
+  const milliseconds = timeOut - timeIn;
   let day;
   let hour;
   let minute;
