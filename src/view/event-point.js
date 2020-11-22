@@ -2,8 +2,6 @@ import {convert, getDate} from "../utils.js";
 
 export const createEventPointTemplate = (item) => {
   const {dateArrival, dateDeparture} = item.date;
-
-  // const getDate = (date) => dayjs(date);
   const duration = convert(dateArrival, dateDeparture);
 
   return `<li class="trip-events__item">
@@ -44,4 +42,3 @@ export const createEventPointTemplate = (item) => {
   </div>
 </li>`;
 };
-//${item.date.duration.days}${item.date.duration.hours}${item.date.duration.minutes}
