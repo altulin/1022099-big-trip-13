@@ -13,6 +13,7 @@ const siteHeaderControlsElement = siteHeaderElement.querySelector(`.trip-main__t
 const siteMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = siteMainElement.querySelector(`.trip-events`);
 const points = generateTaskArray(NUMBER_TASKS);
+const newEventBtn = siteHeaderElement.querySelector(`.trip-main__event-add-btn`);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -26,8 +27,14 @@ render(siteTripEventsElement, createEventListTemplate(), `beforeend`);
 
 const siteTripEventsListElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
-render(siteTripEventsListElement, createEventEditTemplate(points[0]), `afterbegin`);
+// render(siteTripEventsListElement, createEventEditTemplate(points[0]), `afterbegin`);
 
 points.forEach((item) => {
   render(siteTripEventsListElement, createEventPointTemplate(item), `beforeend`);
 });
+
+const onCreateEventEdit = () => {
+  render(siteTripEventsListElement, createEventEditTemplate(points[0]), `afterbegin`);
+};
+
+newEventBtn.addEventListener(`click`, onCreateEventEdit);

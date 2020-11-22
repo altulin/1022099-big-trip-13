@@ -1,4 +1,3 @@
-// import dayjs from "dayjs";
 import {randomInt, getDate} from "../utils.js";
 import {types, cityes, otherOptions, expressions, offerTypes} from "../const.js";
 
@@ -14,21 +13,11 @@ const getDay = () => {
   const dateArrival = getDate().add(daysGap, `day`)
           .add(randomInt(24), `hour`)
           .add(randomInt(60), `minute`);
-
-  // const timeArrival = randomDate;
   const dateDeparture = dateArrival.add(randomInt(20, 6000), `minute`);
-  // const timeDuration = timeDeparture - timeArrival;
 
   return {
     dateArrival: dateArrival.toDate(),
     dateDeparture: dateDeparture.toDate()
-    // dayOfMonth: randomDate.format(`MMM D`),
-    // arrival: timeArrival.format(`HH:mm`),
-    // departure: timeDeparture.format(`HH:mm`),
-    // timeDeparture,
-    // timeArrival,
-
-    // duration: convertMS(timeDuration)
   };
 };
 
@@ -44,7 +33,6 @@ const generateId = () => {
 
 const generateTask = () => {
   const type = types[randomInt(types.length - 1)];
-  // const data = dayjs();
 
   return {
     pointType: type,
@@ -52,7 +40,8 @@ const generateTask = () => {
     offers: {
       offerType: offerTypes[randomInt(offerTypes.length - 1)],
       title: otherOptions[randomInt(otherOptions.length - 1)],
-      price: randomInt(PRICE_MIN, PRICE_MAX)
+      price: randomInt(PRICE_MIN, PRICE_MAX),
+      checked: Boolean(randomInt())
     },
     destination: {
       description: expressions[randomInt(expressions.length - 1)],
@@ -63,7 +52,6 @@ const generateTask = () => {
     mainPrice: randomInt(500, 5000),
     date: getDay()
   };
-
 };
 
 export const generateTaskArray = (number) => {
