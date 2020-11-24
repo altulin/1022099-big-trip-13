@@ -1,4 +1,4 @@
-import {cityes, types, offerTypes} from '../const.js';
+import {cities, types, offerTypes} from '../const.js';
 import {getDate} from "../utils.js";
 
 const createDatalistTemplate = (locality) => {
@@ -33,7 +33,7 @@ const createOfferSelectorTemplate = (element) => {
 };
 
 export const createEventEditTemplate = (item) => {
-  const datalistTemplate = createDatalistTemplate(cityes);
+  const datalistTemplate = createDatalistTemplate(cities);
   const eventTypeTemplate = createEventTypeTemplate(types);
   const offerSelectorTemplate = createOfferSelectorTemplate(offerTypes);
   const {date: {dateArrival, dateDeparture}, mainPrice, pointType, city} = item;

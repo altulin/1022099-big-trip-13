@@ -1,5 +1,5 @@
-import {randomInt, getDate} from "../utils.js";
-import {types, cityes, otherOptions, expressions, offerTypes} from "../const.js";
+import {randomInt, getDate, shuffle} from "../utils.js";
+import {types, cities, otherOptions, expressions, offerTypes} from "../const.js";
 
 const PRICE_MIN = 5;
 const PRICE_MAX = 500;
@@ -33,18 +33,18 @@ const generateId = () => {
 
 const generateTask = () => {
   const type = types[randomInt(types.length - 1)];
-
   return {
     pointType: type,
-    city: cityes[randomInt(cityes.length - 1)],
+    destinationCity: cities[randomInt(cities.length - 1)],
     offers: {
       offerType: offerTypes[randomInt(offerTypes.length - 1)],
       title: otherOptions[randomInt(otherOptions.length - 1)],
       price: randomInt(PRICE_MIN, PRICE_MAX),
       checked: Boolean(randomInt())
     },
+    options: shuffle(offerTypes.slice()).slice(0, randomInt(5)),
     destination: {
-      description: expressions[randomInt(expressions.length - 1)],
+      description: shuffle(expressions.slice()).slice(0, randomInt(5)),
       pictures: getImages()
     },
     isfavorite: Boolean(randomInt()),
@@ -55,6 +55,7 @@ const generateTask = () => {
 };
 
 export const generateTaskArray = (number) => {
+
   return new Array(number)
     .fill(` `)
     .map(() => generateTask())

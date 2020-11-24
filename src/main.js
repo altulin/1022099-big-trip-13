@@ -28,7 +28,6 @@ render(siteTripEventsElement, createEventListTemplate(), `beforeend`);
 const siteTripEventsListElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
 // render(siteTripEventsListElement, createEventEditTemplate(points[0]), `afterbegin`);
-
 points.forEach((item) => {
   render(siteTripEventsListElement, createEventPointTemplate(item), `beforeend`);
 });
