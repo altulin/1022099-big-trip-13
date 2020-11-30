@@ -1,6 +1,7 @@
 
-import {getDate} from "../utils.js";
-export const createTripInfoTemplate = (item) => {
+import {getDate, createElement} from "../utils.js";
+
+const createTripInfoTemplate = (item) => {
   const {dateArrival, dateDeparture} = item.date;
 
   return `<section class="trip-main__trip-info  trip-info">
@@ -17,3 +18,26 @@ export const createTripInfoTemplate = (item) => {
   </p>
 </section>`;
 };
+
+export default class TripInfo {
+  constructor(task) {
+    this._element = null;
+    this._task = task;
+  }
+
+  getTemplate() {
+    return createTripInfoTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
