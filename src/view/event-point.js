@@ -1,6 +1,6 @@
-import {convert, getDate} from "../utils.js";
+import {convert, getDate, createElement} from "../utils.js";
 
-export const createEventPointTemplate = (item) => {
+const createEventPointTemplate = (item) => {
   const {date: {dateArrival, dateDeparture}} = item;
   const duration = convert(dateArrival, dateDeparture);
 
@@ -42,3 +42,26 @@ export const createEventPointTemplate = (item) => {
   </div>
 </li>`;
 };
+
+export default class EventPoint {
+  constructor(task) {
+    this._element = null;
+    this._task = task;
+  }
+
+  getTemplate() {
+    return createEventPointTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

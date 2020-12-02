@@ -1,5 +1,5 @@
 import {cities, types, offerTypes} from '../const.js';
-import {getDate} from "../utils.js";
+import {getDate, createElement} from "../utils.js";
 
 const createDatalistTemplate = (locality) => {
   return locality
@@ -32,7 +32,7 @@ const createOfferSelectorTemplate = (element) => {
           }).join(``);
 };
 
-export const createEventEditTemplate = (item) => {
+const createEventEditTemplate = (item) => {
   const datalistTemplate = createDatalistTemplate(cities);
   const eventTypeTemplate = createEventTypeTemplate(types);
   const offerSelectorTemplate = createOfferSelectorTemplate(offerTypes);
@@ -98,3 +98,26 @@ export const createEventEditTemplate = (item) => {
   </form>
 </li>`;
 };
+
+export default class EventEdit {
+  constructor(task) {
+    this._element = null;
+    this._task = task;
+  }
+
+  getTemplate() {
+    return createEventEditTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
