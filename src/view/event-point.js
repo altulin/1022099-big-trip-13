@@ -1,7 +1,7 @@
 import {convert, getDate, createElement} from "../utils.js";
 
 const createEventPointTemplate = (item) => {
-  const {date: {dateArrival, dateDeparture}} = item;
+  const {date: {dateArrival, dateDeparture}, pointType, destinationCity} = item;
   const duration = convert(dateArrival, dateDeparture);
 
   return `<li class="trip-events__item">
@@ -10,7 +10,7 @@ const createEventPointTemplate = (item) => {
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="img/icons/${item.pointType.toLowerCase()}.png" alt="Event type icon">
     </div>
-    <h3 class="event__title">${item.pointType} ${item.city}</h3>
+    <h3 class="event__title">${pointType} ${destinationCity}</h3>
     <div class="event__schedule">
       <p class="event__time">
         <time class="event__start-time" datetime="${getDate(dateArrival).format(`YYYY-MM-DDTHH:mm:ss`)}">${getDate(dateArrival).format(`HH:mm`)}</time>
