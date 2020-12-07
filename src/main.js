@@ -6,7 +6,7 @@ import EventList from "./view/event-list.js";
 import EventEdit from "./view/event-edit.js";
 import EventPoint from "./view/event-point.js";
 import {generateTaskArray} from "./mock/task.js";
-import {render} from "./utils.js";
+import {render} from "./render.js";
 
 const NUMBER_TASKS = 20;
 const siteHeaderElement = document.querySelector(`.page-header`);
@@ -16,11 +16,11 @@ const siteMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = siteMainElement.querySelector(`.trip-events`);
 const points = generateTaskArray(NUMBER_TASKS);
 
-render(siteHeaderTripMainElement, new TripInfo(points[0]).getElement(), `afterbegin`);
-render(siteHeaderControlsElement, new SiteFilter().getElement(), `afterbegin`);
-render(siteHeaderControlsElement, new SiteMenu().getElement(), `afterbegin`);
-render(siteTripEventsElement, new TripSort().getElement(), `afterbegin`);
-render(siteTripEventsElement, new EventList().getElement(), `beforeend`);
+render(siteHeaderTripMainElement, new TripInfo(points[0]), `afterbegin`);
+render(siteHeaderControlsElement, new SiteFilter(), `afterbegin`);
+render(siteHeaderControlsElement, new SiteMenu(), `afterbegin`);
+render(siteTripEventsElement, new TripSort(), `afterbegin`);
+render(siteTripEventsElement, new EventList(), `beforeend`);
 
 const siteTripEventsListElement = siteTripEventsElement.querySelector(`.trip-events__list`);
 
@@ -43,18 +43,17 @@ const renderTask = (taskListElement, task) => {
     }
   };
 
-  taskComponent.getElement().querySelector(`.event__rollup-btn`).addEventListener(`click`, () => {
+  taskComponent.setClickHandler(() => {
     replaceCardToForm();
     document.addEventListener(`keydown`, onEscKeyDown);
   });
 
-  taskEditComponent.getElement().querySelector(`form`).addEventListener(`submit`, (evt) => {
-    evt.preventDefault();
+  taskEditComponent.setClickHandler(() => {
     replaceFormToCard();
     document.removeEventListener(`keydown`, onEscKeyDown);
   });
 
-  render(taskListElement, taskComponent.getElement(), `beforeend`);
+  render(taskListElement, taskComponent, `beforeend`);
 };
 
 points.slice().forEach((point) => renderTask(siteTripEventsListElement, point));

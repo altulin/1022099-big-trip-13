@@ -1,5 +1,5 @@
-import {convert, getDate, createElement} from "../utils.js";
-
+import {convert, getDate} from "../utils.js";
+import Abstract from "./abstract.js";
 const createEventPointTemplate = (item) => {
   const {date: {dateArrival, dateDeparture}, pointType, destinationCity} = item;
   const duration = convert(dateArrival, dateDeparture);
@@ -43,25 +43,26 @@ const createEventPointTemplate = (item) => {
 </li>`;
 };
 
-export default class EventPoint {
+export default class EventPoint extends Abstract {
+
   constructor(task) {
-    this._element = null;
+    super();
     this._task = task;
+
+    this._clickHandler = this._clickHandler.bind(this);
   }
 
   getTemplate() {
     return createEventPointTemplate(this._task);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _clickHandler(evt) {
+    evt.preventDefault();
+    this._callback.click();
   }
 
-  removeElement() {
-    this._element = null;
+  setClickHandler(callback) {
+    this._callback.click = callback;
+    this.getElement().querySelector(`.event__rollup-btn`).addEventListener(`click`, this._clickHandler);
   }
 }

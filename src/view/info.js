@@ -1,5 +1,6 @@
 
-import {getDate, createElement} from "../utils.js";
+import {getDate} from "../utils.js";
+import Abstract from "./abstract.js";
 
 const createTripInfoTemplate = (item) => {
   const {dateArrival, dateDeparture} = item.date;
@@ -15,25 +16,13 @@ const createTripInfoTemplate = (item) => {
 </section>`;
 };
 
-export default class TripInfo {
+export default class TripInfo extends Abstract {
   constructor(task) {
-    this._element = null;
+    super();
     this._task = task;
   }
 
   getTemplate() {
     return createTripInfoTemplate(this._task);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
