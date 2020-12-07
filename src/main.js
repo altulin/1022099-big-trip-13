@@ -56,4 +56,4 @@ const renderTask = (taskListElement, task) => {
   render(taskListElement, taskComponent, `beforeend`);
 };
 
-points.slice().forEach((point) => renderTask(siteTripEventsListElement, point));
+points.forEach((point) => renderTask(siteTripEventsListElement, point));
